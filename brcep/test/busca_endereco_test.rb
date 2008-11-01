@@ -5,7 +5,7 @@ require 'mocha'
 
 
 INVALID_ZIPS = [0, '0', '00', '000', '0000', '00000', '000000', '0000000', '00000000']
-VALID_ZIPS = [22640100, '22640100', '22.640-100', '22.640-100']
+VALID_ZIPS = [22640100, '22640100', '22.640-100', '22.640-100', '04515030', '04515-030', 04515030]
 
 class MockSuccess < Net::HTTPSuccess
   def initialize; end
@@ -19,7 +19,7 @@ class MockServerError < Net::HTTPServerError
 end
 
 def limpa_cep(numero)
-  numero.to_s.gsub(/\./, '').gsub(/\-/, '').to_i
+  numero.to_s.gsub(/\./, '').gsub(/\-/, '')
 end
 
 class BuscaEnderecoTest < Test::Unit::TestCase

@@ -27,7 +27,7 @@ class BuscaEndereco
   # Exemplo:
   #  BuscaEndereco.por_cep(22640010) ==> ['Avenida', 'das Americas', 'Barra da Tijuca', 'RJ', 'Rio de Janeiro', 22640100]
   def self.por_cep(numero)
-    cep = numero.to_s.gsub(/\./, '').gsub(/\-/, '').to_i
+    cep = numero.to_s.gsub(/\./, '').gsub(/\-/, '')
     response = Net::HTTP.Proxy(self.proxy_addr,self.proxy_port).get_response(URI.parse("#{URL_WEB_SERVICE}#{cep}"))
     
     raise "Não foi possível obter o cep. (#{response.code} - #{response.message})" unless response.kind_of?(Net::HTTPSuccess)
